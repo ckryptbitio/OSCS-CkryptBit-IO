@@ -1,22 +1,53 @@
-/* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
+/* CSS file for page loading animation */
+
+.page-loading {
+  /* Apply loading animation styles to the whole body */
   -webkit-pointer-events: none;
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  position: relative;
 }
 
-.pace-inactive {
-  display: none;
-}
-
-.pace .pace-progress {
-  background-color: rgba(233, 15, 146, 0.19999999999999996);
+.page-loading::before {
+  /* Create a pseudo-element for the progress bar */
+  content: "";
+  display: block;
   position: fixed;
-  z-index: -1;
   top: 0;
-  right: 100%;
-  bottom: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(233, 15, 146, 0.19999999999999996);
+  -webkit-animation: pageLoading 1s infinite;
+  animation: pageLoading 1s infinite;
+}
+
+.page-loading.page-loading-complete {
+  /* Remove loading animation styles when the page is loaded */
+  -webkit-pointer-events: auto;
+  pointer-events: auto;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  user-select: auto;
+}
+
+@-webkit-keyframes pageLoading {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 100%;
+  }
+}
+
+@keyframes pageLoading {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 100%;
+  }
 }
