@@ -1,39 +1,34 @@
 // Side effect imports
 import './prototype';
 
-import {
-    getSetGlobalLocale,
-    defineLocale,
-    updateLocale,
-    getLocale,
-    listLocales
-} from './locales';
+import * as localeModule from './locales';
+import * as listModule from './lists';
+import { deprecate, hooks } from '../utils';
 
-import {
-    listMonths,
-    listMonthsShort,
-    listWeekdays,
-    listWeekdaysShort,
-    listWeekdaysMin
-} from './lists';
-
+// Export all named exports from the locales module
 export {
-    getSetGlobalLocale,
-    defineLocale,
-    updateLocale,
-    getLocale,
-    listLocales,
-    listMonths,
-    listMonthsShort,
-    listWeekdays,
-    listWeekdaysShort,
-    listWeekdaysMin
+    getSetGlobalLocale as getSetGlobalLocale,
+    defineLocale as defineLocale,
+    updateLocale as updateLocale,
+    getLocale as getLocale,
+    listLocales as listLocales,
+    ...localeModule
 };
 
-import { deprecate } from '../utils/deprecate';
-import { hooks } from '../utils/hooks';
+// Export all named exports from the lists module
+export {
+    listMonths,
+    listMonthsShort,
+    listWeekdays,
+    listWeekdaysShort,
+    listWeekdaysMin,
+    ...listModule
+};
 
-hooks.lang = deprecate('moment.lang is deprecated. Use moment.locale instead.', getSetGlobalLocale);
-hooks.langData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', getLocale);
+const deprecatedLocale = deprecate('moment.lang is deprecated. Use moment.locale instead.', localeModule.getSetGlobalLocale);
+const deprecatedLocaleData = deprecate('moment.langData is deprecated. Use moment.localeData instead.', localeModule.getLocale);
+
+hooks.lang = deprecatedLocale;
+hooks.langData = deprecatedLocaleData;
 
 import './en';
