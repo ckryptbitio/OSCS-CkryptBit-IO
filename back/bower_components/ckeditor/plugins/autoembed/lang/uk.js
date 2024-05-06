@@ -1,1 +1,4 @@
-﻿CKEDITOR.plugins.setLang("autoembed","uk",{embeddingInProgress:"Намагаюсь вбудувати вставлене URL посилання...",embeddingFailed:"Це URl посилання не може бути автоматично вбудовано."});
+CKEDITOR.plugins.setLang("autoembed", "uk", {
+  embeddingInProgress: "Спробую вбудувати посилання…",
+  embeddingFailed: "Не вдалося вбудувати це посилання автоматично."
+});
