@@ -1,23 +1,26 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
+
+/* Disable user interactions and selection on the .pace element */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
-
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
 
+/* Hide the .pace-inactive element by default */
 .pace-inactive {
   display: none;
 }
 
+/* Style the progress bar for the loading animation */
 .pace .pace-progress {
-  background: #fcd25a;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  right: 100%;
-  width: 100%;
-  height: 2px;
+  background: #fcd25a; /* Set the background color of the progress bar */
+  position: fixed; /* Position the progress bar fixed to the viewport */
+  z-index: 2000; /* Set a high z-index value to ensure the progress bar appears on top of other elements */
+  top: 0; /* Position the progress bar at the top of the viewport */
+  right: 100%; /* Position the progress bar to the right of the viewport */
+  width: 100%; /* Set the width of the progress bar to 100% of the viewport */
+  height: 2px; /* Set the height of the progress bar to 2px */
 }
