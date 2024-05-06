@@ -1,1 +1,6 @@
-﻿CKEDITOR.plugins.setLang("autoembed","km",{embeddingInProgress:"កំពុង​ព្យាយាម​បង្កប់ URL ដែល​បាន​បិទភ្ជាប់...",embeddingFailed:"មិន​អាច​បង្កប់ URL នេះ​ដោយ​ស្វ័យប្រវត្តិ​ទេ។"});
+if (CKEDITOR && CKEDITOR.plugins && CKEDITOR.plugins.setLang) {
+  CKEDITOR.plugins.setLang("autoembed", "km", {
+    embeddingInProgress: "URL ដែលបានបិទភ្ជាប់នេ���� Cambodian (Khmer) គឺកំពុងព្យាយាមបង្កប់...",
+    embeddingFailed: "URL នេ���� Cambodian (Khmer) មិនអាចបង្កប់ដោយស្វ័យប្រវត្តិទេ។",
+  });
+}
