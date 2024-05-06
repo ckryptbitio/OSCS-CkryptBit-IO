@@ -1,18 +1,15 @@
 //! moment.js locale configuration
 
-;(function (global, factory) {
-   typeof exports === 'object' && typeof module !== 'undefined'
-       && typeof require === 'function' ? factory(require('../moment')) :
-   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
-   factory(global.moment)
+(function (global, factory) {
+   if (typeof exports === 'object' && typeof module !== 'undefined')
+       module.exports = factory(require('../moment'));
+   else if (typeof define === 'function' && define.amd)
+       define(['../moment'], factory);
+   else global.moment.locale('hy-am', factory(global.moment));
 }(this, (function (moment) { 'use strict';
 
-
     var hyAm = moment.defineLocale('hy-am', {
-        months : {
-            format: 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split('_'),
-            standalone: 'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split('_')
-        },
+        months : 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split('_'),
         monthsShort : 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_'),
         weekdays : 'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split('_'),
         weekdaysShort : 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
@@ -69,19 +66,14 @@
             }
         },
         dayOfMonthOrdinalParse: /\d{1,2}|\d{1,2}-(ին|րդ)/,
-        ordinal: function (number, period) {
-            switch (period) {
-                case 'DDD':
-                case 'w':
-                case 'W':
-                case 'DDDo':
-                    if (number === 1) {
-                        return number + '-ին';
-                    }
-                    return number + '-րդ';
-                default:
-                    return number;
+        ordinal : function (number, period) {
+            if (period === 'DDD' || period === 'w' || period === 'W' || period === 'DDDo') {
+                if (number === 1) {
+                    return number + '-ին';
+                }
+                return number + '-րդ';
             }
+            return number;
         },
         week : {
             dow : 1, // Monday is the first day of the week.
