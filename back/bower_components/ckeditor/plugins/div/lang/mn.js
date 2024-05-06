@@ -1,1 +1,15 @@
-﻿CKEDITOR.plugins.setLang("div","mn",{IdInputLabel:"Id",advisoryTitleInputLabel:"Зөвлөлдөх гарчиг",cssClassInputLabel:"Stylesheet классууд",edit:"Edit Div",inlineStyleInputLabel:"Inline Style",langDirLTRLabel:"Зүүн талаас баруун тишээ (LTR)",langDirLabel:"Хэлний чиглэл",langDirRTLLabel:"Баруун талаас зүүн тишээ (RTL)",languageCodeInputLabel:" Language Code",remove:"Remove Div",styleSelectLabel:"Загвар",title:"Div гэдэг хэсэг бий болгох",toolbar:"Div гэдэг хэсэг бий болгох"});
+CKEDITOR.plugins.setLang("div", "mn", {
+    idInputLabel: "ID",
+    advisoryTitleInputLabel: "Тусламж titles",
+    cssClassInputLabel: "StyleSheet классууд",
+    edit: "Div редактировать",
+    inlineStyleInputLabel: "Inline стиль",
+    langDirLTRLabel: "Зүүн талаас баруун тиш (LTR)",
+    langDirLabel: "Хэлчиглэл",
+    langDirRTLLabel: "Баруун талаас зүүн тиш (RTL)",
+    languageCodeInputLabel: "Хэл код",
+    remove: "Div устгах",
+    styleSelectLabel: "Style",
+    title: "Div тэмдэгт бий болгох",
+    toolbar: "Div тэмдэгт бий болгох"
+});
