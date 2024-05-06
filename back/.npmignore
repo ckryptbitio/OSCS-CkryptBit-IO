@@ -1,2 +1,9 @@
-documentation/
-composer.json
+my-project/
+|-- src/
+|   |-- MyProject.php
+|   |-- Controller/
+|   |   |-- HomeController.php
+|   |   |-- AboutController.php
+|   |-- Model/
+|   |   |-- User.php
+|  
