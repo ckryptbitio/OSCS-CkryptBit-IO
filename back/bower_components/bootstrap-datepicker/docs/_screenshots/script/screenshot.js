@@ -1,60 +1,79 @@
 /* jshint phantom:true, devel:true */
 /* Usage: phantomjs screenshot.js in.html out.png */
 
-var sys = require('system'),
+const sys = require('system'),
     page = new WebPage();
+
 page.viewportSize = {
     width: 800,
     height: 600
 };
 
-page.open(sys.args[1], function(status){
-    if (status !== 'success'){
+page.onConsoleMessage = function(msg) {
+    console.log(msg);
+};
+
+page.onError = function(msg, trace) {
+    console.log(msg);
+    console.log('Trace:');
+    trace.forEach(function(t) {
+        console.log(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function ' + t.function +')' : ''));
+    });
+};
+
+page.onResourceError = function(resourceError) {
+    console.log('Unable to load resource (URL:' + resourceError.url + '):', resourceError.errorString);
+};
+
+page.open(sys.args[1], function(status) {
+    if (status !== 'success') {
         console.log('Bad status: %s', status);
         phantom.exit(1);
     }
-    window.setTimeout(function(){
-        var box = page.evaluate(function(){
-            var lefts, rights, tops, bottoms,
+    setTimeout(function() {
+        const box = page.evaluate(() => {
+            const lefts = [],
+                rights = [],
+                tops = [],
+                bottoms = [],
                 padding = 10, // px
                 selection, show;
 
-            // Call setup method
-            if (window.setup)
-                window.setup();
-            // Show all pickers, or only those marked for showing
+            if (window.setup) window.setup();
+
             show = $('body').data('show');
             show = show ? $(show) : $('*');
-            show
-                .filter(function(){
-                    return 'datepicker' in $(this).data();
-                })
-                .datepicker('show');
 
-            // Get bounds of selected elements
+            show.filter(function() {
+                return 'datepicker' in $(this).data();
+            }).datepicker('show');
+
             selection = $($('body').data('capture'));
-            tops = selection.map(function(){
-                return $(this).offset().top;
-            }).toArray();
-            lefts = selection.map(function(){
-                return $(this).offset().left;
-            }).toArray();
-            bottoms = selection.map(function(){
-                return $(this).offset().top + $(this).outerHeight();
-            }).toArray();
-            rights = selection.map(function(){
-                return $(this).offset().left + $(this).outerWidth();
-            }).toArray();
 
-            // Convert bounds to single bounding box
-            var b = {
-                top: Math.min.apply(Math, tops),
-                left: Math.min.apply(Math, lefts)
+            tops = Array.from(selection, function(el) {
+                return $(el).offset().top;
+            });
+
+            lefts = Array.from(selection, function(el) {
+                return $(el).offset().left;
+            });
+
+            bottoms = Array.from(selection, function(el) {
+                return $(el).offset().top + $(el).outerHeight();
+            });
+
+            rights = Array.from(selection, function(el) {
+                return $(el).offset().left + $(el).outerWidth();
+            });
+
+            const b = {
+                top: Math.min(...tops),
+                left: Math.min(...lefts)
             };
-            b.width = Math.max.apply(Math, rights) - b.left;
-            b.height = Math.max.apply(Math, bottoms) - b.top;
 
-            // Return bounding box
+            b.width = Math.max(...rights) - b.left;
+            b.height = Math.max(...bottoms) - b.top;
+
             return {
                 top: Math.max(b.top - padding, 0),
                 left: Math.max(b.left - padding, 0),
@@ -62,8 +81,14 @@ page.open(sys.args[1], function(status){
                 height: b.height + 2 * padding
             };
         });
-        page.clipRect = box;
-        page.render(sys.args[2]);
-        phantom.exit();
+
+        if (box) {
+            page.clipRect = box;
+            page.render(sys.args[2]);
+            phantom.exit();
+        } else {
+            console.log('Unable to get the bounding box');
+            phantom.exit(1);
+        }
     }, 1);
 });
