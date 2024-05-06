@@ -1,14 +1,22 @@
+# Configuration for issue staleness
+
 # Number of days of inactivity before an issue becomes stale
-daysUntilStale: 60
+days_until_stale: 60
+
 # Number of days of inactivity before a stale issue is closed
-daysUntilClose: 7
+days_until_close: 7
+
 # Issues with these labels will never be considered stale
+exempt_labels: []
+
 # Label to use when marking an issue as stale
-staleLabel: "status: stale"
+stale_label: "status: stale"
+
 # Comment to post when marking an issue as stale. Set to `false` to disable
-markComment: >
+mark_comment: |
   This issue has been automatically marked as stale because it has not had
   recent activity. It will be closed if no further activity occurs. Thank you
   for your contributions.
+
 # Comment to post when closing a stale issue. Set to `false` to disable
-closeComment: false
+close_comment: false
