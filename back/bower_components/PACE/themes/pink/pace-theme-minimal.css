@@ -1,5 +1,21 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
+
+/* Adding a class for the progress bar container */
+.progress-bar-container {
+  position: fixed;
+  top: 0;
+    /* Centering the progress bar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  height: 2px;
+  width: 0;
+  /* Adding a transition for a smooth animation */
+  transition: width 0.5s ease;
+}
+
+/* Making the elements inside the progress bar non-interactive */
+.progress-bar-container * {
   -webkit-pointer-events: none;
   pointer-events: none;
 
@@ -8,16 +24,49 @@
   user-select: none;
 }
 
-.pace-inactive {
+/* Hiding the inactive progress bar */
+.progress-bar-container.inactive {
   display: none;
 }
 
-.pace .pace-progress {
+/* Adding the progress bar background color */
+.progress-bar-container::before {
+  content: "";
   background: #e90f92;
-  position: fixed;
-  z-index: 2000;
+  position: absolute;
   top: 0;
-  right: 100%;
-  width: 100%;
-  height: 2px;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
+/* Adding the keyframes for the animation */
+@-webkit-keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes progress {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Adding the animation to the progress bar */
+.progress-bar-container.active {
+  animation: progress 2s forwards;
+  -webkit-animation: progress 2s forwards;
+}
+
+
+<div class="progress-bar-container inactive"></div>
+
+
+<div class="progress-bar-container active"></div>
