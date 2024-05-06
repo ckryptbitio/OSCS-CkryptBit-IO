@@ -1,5 +1,7 @@
-jvm.SVGCircleElement = function(config, style){
-  jvm.SVGCircleElement.parentClass.call(this, 'circle', config, style);
-};
+class SVGCircleElement extends SVGShapeElement {
+  constructor(config, style) {
+    super('circle', config, style);
+  }
+}
 
-jvm.inherits(jvm.SVGCircleElement, jvm.SVGShapeElement);
+SVGCircleElement.inherits(SVGShapeElement);
