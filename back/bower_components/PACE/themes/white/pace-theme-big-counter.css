@@ -1,5 +1,7 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
+
+/* Added a class for the outer container to avoid affecting other elements with the same styles */
+.pace-container {
   -webkit-pointer-events: none;
   pointer-events: none;
 
@@ -8,7 +10,7 @@
   user-select: none;
 }
 
-.pace.pace-inactive .pace-progress {
+.pace-inactive .pace-progress {
   display: none;
 }
 
