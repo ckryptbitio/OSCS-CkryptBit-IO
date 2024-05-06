@@ -1,7 +1,9 @@
-define( [
+define([
 	"./class2type"
-], function( class2type ) {
+], function(class2type) {
 	"use strict";
 
-	return class2type.hasOwnProperty;
-} );
+	// Return the hasOwnProperty method of the class2type object
+	return Object.prototype.hasOwnProperty.bind(class2type);
+});
+
