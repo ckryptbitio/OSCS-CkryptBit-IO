@@ -1,18 +1,23 @@
 {
-  "bitwise": false,
-  "browser": true,
-  "curly": true,
-  "eqeqeq": true,
-  "eqnull": true,
-  "esnext": true,
-  "immed": true,
-  "jquery": true,
-  "latedef": true,
-  "newcap": true,
-  "noarg": true,
-  "node": true,
-  "strict": false,
-  "trailing": true,
-  "undef": true,
-  "predef" : ["define"]
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "curly": "error",
+    "eqeqeq": "error",
+    "eqnull": "error",
+    "immed": "error",
+    "latedef": "error",
+    "newcap": "error",
+    "noarg": "error",
+    "undef": "error",
+    "strict": "error",
+    "trailing": "error",
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "bitwise": false,
+    "predef": ["define"]
+  }
 }
