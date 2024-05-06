@@ -1,8 +1,11 @@
-<a href="#" class="btn btn-default" id="cp4">Change background color</a>
+<button class="btn btn-default" id="change-background-color">Change background color</button>
 <script>
-    $(function () {
-        $('#cp4').colorpicker().on('changeColor', function (e) {
-            $('body')[0].style.backgroundColor = e.color.toString('rgba');
-        });
+  $(function () {
+    $('#change-background-color').colorpicker({
+      color: '#ffffff',
+      onChange: function (color, event) {
+        $('body').css('background-color', color.toHex());
+      }
     });
+  });
 </script>
