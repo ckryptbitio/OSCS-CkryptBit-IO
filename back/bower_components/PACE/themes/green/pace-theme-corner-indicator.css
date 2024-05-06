@@ -1,7 +1,9 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
+
+/* Added a more specific selector to avoid affecting other elements */
+body .pace {
+  /* Changed pointer-events to auto to allow user interaction */
+  pointer-events: auto;
 
   -webkit-user-select: none;
   -moz-user-select: none;
