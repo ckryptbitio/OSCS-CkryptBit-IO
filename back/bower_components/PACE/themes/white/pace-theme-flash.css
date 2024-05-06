@@ -1,10 +1,16 @@
-/* This is a compiled file, you should be editing the file in the templates directory */
+/* Global CSS settings for the PACE loader */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .pace-inactive {
@@ -13,12 +19,9 @@
 
 .pace .pace-progress {
   background: #ffffff;
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  right: 100%;
-  width: 100%;
   height: 2px;
+  right: 0;
+  width: 100%;
 }
 
 .pace .pace-progress-inner {
@@ -59,18 +62,22 @@
   0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
 }
+
 @-moz-keyframes pace-spinner {
   0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
   100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
 }
+
 @-o-keyframes pace-spinner {
   0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
   100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
 }
+
 @-ms-keyframes pace-spinner {
   0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
   100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
 }
+
 @keyframes pace-spinner {
   0% { transform: rotate(0deg); transform: rotate(0deg); }
   100% { transform: rotate(360deg); transform: rotate(360deg); }
