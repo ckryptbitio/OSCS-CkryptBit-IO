@@ -1,1 +1,10 @@
-﻿CKEDITOR.plugins.setLang("colordialog","ko",{clear:"비우기",highlight:"강조",options:"색상 옵션",selected:"선택된 색상",title:"색상 선택"});
+CKEDITOR.plugins.add('colordialog', {
+    lang: ['ko'],
+    init: function(editor) {
+        editor.lang.colordialog.clear = 'Clear';
+        editor.lang.colordialog.highlight = 'Highlight';
+        editor.lang.colordialog.options = 'Color Options';
+        editor.lang.colordialog.selected = 'Selected Color';
+        editor.lang.colordialog.title = 'Color Selection';
+    }
+});
