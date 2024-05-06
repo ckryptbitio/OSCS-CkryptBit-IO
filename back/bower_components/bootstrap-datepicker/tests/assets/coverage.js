@@ -1,47 +1,55 @@
-(function(){
-    //we want this at global scope so outside callers can find it. In a more realistic implementation we
-    //should probably put it in a namespace.
-    window.getCoverageByLine = function(silent) {
-        var key = null;
-        var lines = null;
-        var source = null;
-        //look for code coverage data
+(function () {
+    // Function to get code coverage by line
+    window.getCoverageByLine = function (silent) {
+        let key = ''; // Initialize key
+        let lines = []; // Initialize lines as an empty array
+        let source = null;
+
+        // Look for code coverage data
         if (typeof window._$jscoverage === 'object') {
-            for (key in _$jscoverage) {}
+            for (const key in _$jscoverage) {}
             lines = _$jscoverage[key];
         }
 
         if (!lines && !silent) {
-           console.log('code coverage data is NOT available');
+            console.log('Code coverage data is NOT available');
         }
 
         return { 'key': key, 'lines': lines };
     };
 
-    QUnit.done = function(t) {
-        var cvgInfo = getCoverageByLine(true);
-        if (!!cvgInfo.key) {
-            var testableLines = 0;
-            var testedLines = 0;
-            var untestableLines = 0;
-            for (lineIdx in cvgInfo.lines) {
-                var cvg = cvgInfo.lines[lineIdx];
-                if (typeof cvg === 'number') {
-                    testableLines += 1;
-                    if (cvg > 0) {
-                        testedLines += 1;
-                    }
-                } else {
-                    untestableLines += 1;
-                }
-            }
-            var coverage = '' + Math.floor(100 * testedLines / testableLines) + '%';
+    // QUnit done function
+    QUnit.done = function (t) {
+        const cvgInfo = getCoverageByLine(true);
 
-            var result = document.getElementById('qunit-testresult');
-            if (result != null) {
-                result.innerHTML = result.innerHTML + ' ' + coverage + ' test coverage of ' + cvgInfo.key;
+        if (cvgInfo.key) {
+            let testableLines = 0;
+            let testedLines = 0;
+            let untestableLines = 0;
+
+            // Check if cvgInfo.lines is an array
+            if (Array.isArray(cvgInfo.lines)) {
+                cvgInfo.lines.forEach(line => {
+                    if (typeof line === 'number') {
+                        testableLines += 1;
+                        if (line > 0) {
+                            testedLines += 1;
+                        }
+                    } else {
+                        untestableLines += 1;
+                    }
+                });
+
+                const coverage = '' + Math.floor(100 * testedLines / testableLines) + '%';
+
+                const result = document.getElementById('qunit-testresult');
+                if (result) { // Check if result is not null
+                    result.innerHTML = result.innerHTML + ' ' + coverage + ' test coverage of ' + cvgInfo.key;
+                } else {
+                    console.log('Can\'t find test-result element to update');
+                }
             } else {
-                console.log('can\'t find test-result element to update');
+                console.log('Code coverage data is not an array');
             }
         }
     };
