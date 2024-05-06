@@ -1,48 +1,18 @@
-define([
-  'jquery',
-  './utils'
-], function ($, CompatUtils) {
-  // No-op CSS adapter that discards all classes by default
-  function _containerAdapter (clazz) {
-    return null;
+/**
+ * ContainerCSS class that renders the container with the given CSS options
+ * @param {Object} options - The options for the ContainerCSS
+ */
+define(['jquery', './utils'], function ($, CompatUtils) {
+  function ContainerCSS(options) {
+    this.options = options;
   }
 
-  function ContainerCSS () { }
-
   ContainerCSS.prototype.render = function (decorated) {
-    var $container = decorated.call(this);
+    const $container = decorated.call(this);
 
-    var containerCssClass = this.options.get('containerCssClass') || '';
-
-    if ($.isFunction(containerCssClass)) {
-      containerCssClass = containerCssClass(this.$element);
-    }
-
-    var containerCssAdapter = this.options.get('adaptContainerCssClass');
-    containerCssAdapter = containerCssAdapter || _containerAdapter;
-
-    if (containerCssClass.indexOf(':all:') !== -1) {
-      containerCssClass = containerCssClass.replace(':all:', '');
-
-      var _cssAdapter = containerCssAdapter;
-
-      containerCssAdapter = function (clazz) {
-        var adapted = _cssAdapter(clazz);
-
-        if (adapted != null) {
-          // Append the old one along with the adapted one
-          return adapted + ' ' + clazz;
-        }
-
-        return clazz;
-      };
-    }
-
-    var containerCss = this.options.get('containerCss') || {};
-
-    if ($.isFunction(containerCss)) {
-      containerCss = containerCss(this.$element);
-    }
+    const containerCssClass = this.getContainerCssClass();
+    const containerCssAdapter = this.getContainerCssAdapter();
+    const containerCss = this.getContainerCss();
 
     CompatUtils.syncCssClasses($container, this.$element, containerCssAdapter);
 
@@ -50,6 +20,36 @@ define([
     $container.addClass(containerCssClass);
 
     return $container;
+  };
+
+  ContainerCSS.prototype.getContainerCssClass = function () {
+    const containerCssClass = this.options.get('containerCssClass') || '';
+
+    if ($.isFunction(containerCssClass)) {
+      return containerCssClass(this.$element);
+    }
+
+    return containerCssClass;
+  };
+
+  ContainerCSS.prototype.getContainerCssAdapter = function () {
+    const containerCssAdapter = this.options.get('adaptContainerCssClass') || (clazz => null);
+
+    if (typeof containerCssAdapter !== 'function') {
+      throw new Error('The `adaptContainerCssClass` option must be a function');
+    }
+
+    return containerCssAdapter;
+  };
+
+  ContainerCSS.prototype.getContainerCss = function () {
+    const containerCss = this.options.get('containerCss') || {};
+
+    if ($.isFunction(containerCss)) {
+      return containerCss(this.$element);
+    }
+
+    return containerCss;
   };
 
   return ContainerCSS;
