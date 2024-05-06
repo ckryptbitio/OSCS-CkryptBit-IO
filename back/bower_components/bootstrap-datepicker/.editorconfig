@@ -1,5 +1,6 @@
-# EditorConfig is awesome: http://EditorConfig.org
+# EditorConfig: http://editorconfig.org
 
+# top-most EditorConfig file
 root = true
 
 [*]
@@ -9,3 +10,10 @@ indent_size = 2
 indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[*.{js,jsx,ts,tsx}]
+jsonc = true
+
+[*.md]
+trim_trailing_whitespace = false
+
