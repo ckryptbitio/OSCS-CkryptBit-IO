@@ -1,36 +1,106 @@
-describe 'Morris.Bar#colorFor', ->
+describe('Morris.Bar#colorFor', () => {
+  const defaults = {
+    element: 'graph',
+    data: [{ x: 'foo', y: 2, z: 3 }, { x: 'bar', y: 4, z: 6 }],
+    xkey: 'x',
+    ykeys: ['y', 'z'],
+    labels: ['Y', 'Z'],
+  };
 
-  defaults =
-    element: 'graph'
-    data: [{x: 'foo', y: 2, z: 3}, {x: 'bar', y: 4, z: 6}]
-    xkey: 'x'
-    ykeys: ['y', 'z']
-    labels: ['Y', 'Z']
+  it('should fetch colors from an array', () => {
+    const barColors = ['#f00', '#0f0', '#00f'];
+    const chart = Morris.Bar.prototype.colorFor;
+    const data = defaults.data[0];
 
-  it 'should fetch colours from an array', ->
-    chart = Morris.Bar $.extend {}, defaults, barColors: ['#f00', '#0f0', '#00f']
-    chart.colorFor(chart.data[0], 0, 'bar').should.equal '#f00'
-    chart.colorFor(chart.data[0], 0, 'hover').should.equal '#f00'
-    chart.colorFor(chart.data[0], 1, 'bar').should.equal '#0f0'
-    chart.colorFor(chart.data[0], 1, 'hover').should.equal '#0f0'
-    chart.colorFor(chart.data[0], 2, 'bar').should.equal '#00f'
-    chart.colorFor(chart.data[0], 2, 'hover').should.equal '#00f'
-    chart.colorFor(chart.data[0], 3, 'bar').should.equal '#f00'
-    chart.colorFor(chart.data[0], 4, 'hover').should.equal '#0f0'
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      0,
+      'bar'
+    ).should.equal(barColors[0]);
 
-  it 'should defer to a callback', ->
-    stub = sinon.stub().returns '#f00'
-    chart = Morris.Bar $.extend {}, defaults, barColors: stub
-    stub.reset()
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      0,
+      'hover'
+    ).should.equal(barColors[0]);
 
-    chart.colorFor(chart.data[0], 0, 'bar')
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      1,
+      'bar'
+    ).should.equal(barColors[1]);
+
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      1,
+      'hover'
+    ).should.equal(barColors[1]);
+
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      2,
+      'bar'
+    ).should.equal(barColors[2]);
+
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      2,
+      'hover'
+    ).should.equal(barColors[2]);
+
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      3,
+      'bar'
+    ).should.equal(barColors[0]);
+
+    chart.call(
+      $.extend({}, defaults, { barColors }),
+      data,
+      4,
+      'hover'
+    ).should.equal(barColors[1]);
+  });
+
+  it('should defer to a callback', () => {
+    const stub = sinon.stub().returns('#f00');
+    const chart = Morris.Bar.prototype.colorFor;
+
+    stub.reset();
+
+    chart.call(
+      $.extend({}, defaults, { barColors: stub }),
+      defaults.data[0],
+      0,
+      'bar'
+    );
+
     stub.should.have.been.calledWith(
-      {x:0, y:2, label:'foo'},
-      {index:0, key:'y', label:'Y'},
-      'bar')
+      { x: 0, y: 2, label: 'foo' },
+      { index: 0, key: 'y', label: 'Y' },
+      'bar'
+    );
 
-    chart.colorFor(chart.data[0], 1, 'hover')
+    stub.reset();
+
+    chart.call(
+      $.extend({}, defaults, { barColors: stub }),
+      defaults.data[0],
+      1,
+      'hover'
+    );
+
     stub.should.have.been.calledWith(
-      {x:0, y:3, label:'foo'},
-      {index:1, key:'z', label:'Z'},
-      'hover')
+      { x: 0, y: 3, label: 'foo' },
+      { index: 1, key: 'z', label: 'Z' },
+      'hover'
+    );
+  });
+});
