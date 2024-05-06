@@ -1,14 +1,24 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
+
+/* General styling for the page loading progress bar */
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  /* Hide the progress bar by default */
+  display: none;
 }
 
+/* Styling for the active state of the progress bar */
 .pace-inactive {
   display: none;
+}
+
+.pace.pace-running {
+  /* Show the progress bar when the page is loading */
+  display: block;
 }
 
 .pace .pace-progress {
