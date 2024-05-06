@@ -1,11 +1,21 @@
-var Color = require("../../src/js/colorpicker-color.js");
+const Color = require("../../src/js/colorpicker-color.js");
 
-it("should return color in raw format", function(){
-  var color = new Color('aabbcc');
-  expect(color.toHex(true)).toEqual("#aabbcc");
-});
+describe("Color class", () => {
+  let color;
 
-it("should return color formatted", function(){
-  var color = new Color('aabbcc');
-  expect(color.toHex()).toEqual("aabbcc");
+  beforeEach(() => {
+    color = new Color("aabbcc");
+  });
+
+  it("should return color in raw format (with #)", () => {
+    expect(color.toHex(true)).toEqual("#aabbcc");
+  });
+
+  it("should return color in raw format (without #)", () => {
+    expect(color.toHex(false)).toEqual("aabbcc");
+  });
+
+  it("should return color in formatted format (without #)", () => {
+    expect(color.toString()).toEqual("aabbcc");
+  });
 });
