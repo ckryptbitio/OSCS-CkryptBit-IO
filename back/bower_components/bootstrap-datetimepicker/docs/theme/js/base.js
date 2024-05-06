@@ -1,58 +1,62 @@
+(function () {
+    // Prettyify
+    function prettyPrint() {
+        try {
+            PR.prettyPrint();
+        } catch (e) {
+            console.error('Error executing prettyPrint():', e);
+        }
+    }
 
-/* Prettyify */
-$(document).ready(function () {
-    prettyPrint();
-});
+    $(document).ready(function () {
+        prettyPrint();
+    });
 
+    // Scrollspy
+    const navHeight = $('.navbar').outerHeight(true) + 10;
 
-/* Scrollspy */
-var navHeight = $('.navbar').outerHeight(true) + 10
+    $('body').scrollspy({
+        target: '.bs-sidebar',
+        offset: navHeight
+    });
 
-$('body').scrollspy({
-    target: '.bs-sidebar',
-    offset: navHeight
-})
+    // Prevent disabled links from causing a page reload
+    $("li.disabled a").click(function (event) {
+        preventDefault(event);
+    });
 
+    // Adjust the scroll height of anchors to compensate for the fixed navbar
+    let disableShift = false;
+    function shiftWindow() {
+        if (disableShift) {
+            disableShift = false;
+        } else {
+            const scrolledToBottomOfPage = (
+                (window.innerHeight + window.scrollY) >= document.body.offsetHeight
+            );
+            if (!scrolledToBottomOfPage) {
+                scrollBy(0, -60);
+            }
+        }
+    }
+    if (location.hash) {
+        shiftWindow();
+    }
+    $(window).on("hashchange", shiftWindow);
 
-/* Prevent disabled links from causing a page reload */
-$("li.disabled a").click(function () {
-    event.preventDefault();
-});
+    // Deal with clicks on nav links that do not change the current anchor link.
+    $("ul.nav a").click(function () {
+        const href = this.href;
+        const suffix = location.hash;
+        const matchesCurrentHash = (href.indexOf(suffix, href.length - suffix.length) !== -1);
+        if (location.hash && matchesCurrentHash) {
+            // Force a single 'hashchange' event to occur after the click event
+            disableShift = true;
+            location.hash = '';
+        }
+    });
 
-
-/* Adjust the scroll height of anchors to compensate for the fixed navbar */
-window.disableShift = false;
-var shiftWindow = function () {
-    if (window.disableShift) {
-        window.disableShift = false;
-    } else {
-        /* If we're at the bottom of the page, don't erronously scroll up */
-        var scrolledToBottomOfPage = (
-            (window.innerHeight + window.scrollY) >= document.body.offsetHeight
-        );
-        if (!scrolledToBottomOfPage) {
-            scrollBy(0, -60);
-        };
-    };
-};
-if (location.hash) { shiftWindow(); }
-window.addEventListener("hashchange", shiftWindow);
-
-
-/* Deal with clicks on nav links that do not change the current anchor link. */
-$("ul.nav a").click(function () {
-    var href = this.href;
-    var suffix = location.hash;
-    var matchesCurrentHash = (href.indexOf(suffix, href.length - suffix.length) !== -1);
-    if (location.hash && matchesCurrentHash) {
-        /* Force a single 'hashchange' event to occur after the click event */
-        window.disableShift = true;
-        location.hash = '';
-    };
-});
-
-$(document).bind('DOMNodeInserted',
-    function (e) {
+    $(document).on('DOMNodeInserted', function (e) {
         if (e.target.id === 'carbonads') {
             $('.bs-sidebar').affix({
                 offset: {
@@ -61,3 +65,9 @@ $(document).bind('DOMNodeInserted',
             });
         }
     });
+
+    // Utility function to prevent default behavior of an event
+    function preventDefault(event) {
+        event.preventDefault();
+    }
+})();
