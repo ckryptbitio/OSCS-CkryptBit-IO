@@ -1,5 +1,12 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
+
+/* Set the background color of the loading overlay */
+:root {
+  --pace-background-color: #fff;
+}
+
 .pace {
+  /* Prevent user interaction and selection */
   -webkit-pointer-events: none;
   pointer-events: none;
 
@@ -7,14 +14,17 @@
   -moz-user-select: none;
   user-select: none;
 
+  /* Hide any overflow and position the overlay fixed */
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 2000;
+
+  /* Set the width, height, and background color */
   width: 100%;
   height: 12px;
-  background: #fff;
+  background: var(--pace-background-color);
 }
 
 .pace-inactive {
@@ -22,6 +32,7 @@
 }
 
 .pace .pace-progress {
+  /* Set the background color and position the progress bar fixed */
   background-color: #d6d6d6;
   position: fixed;
   top: 0;
@@ -32,6 +43,7 @@
 }
 
 .pace .pace-activity {
+  /* Set the position, transform, background image, and size */
   position: fixed;
   top: 0;
   right: -32px;
@@ -39,45 +51,21 @@
   left: 0;
 
   -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 
-  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.2)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.75, rgba(255, 255, 255, 0.2)), color-stop(0.75, transparent), to(transparent));
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
-  -webkit-background-size: 32px 32px;
-  -moz-background-size: 32px 32px;
-  -o-background-size: 32px 32px;
+  background-repeat: no-repeat;
   background-size: 32px 32px;
 
-  -webkit-animation: pace-theme-barber-shop-motion 500ms linear infinite;
-  -moz-animation: pace-theme-barber-shop-motion 500ms linear infinite;
-  -ms-animation: pace-theme-barber-shop-motion 500ms linear infinite;
-  -o-animation: pace-theme-barber-shop-motion 500ms linear infinite;
+  /* Set the animation duration, delay, and keyframes */
   animation: pace-theme-barber-shop-motion 500ms linear infinite;
 }
 
-@-webkit-keyframes pace-theme-barber-shop-motion {
-  0% { -webkit-transform: none; transform: none; }
-  100% { -webkit-transform: translate(-32px, 0); transform: translate(-32px, 0); }
-}
-@-moz-keyframes pace-theme-barber-shop-motion {
-  0% { -moz-transform: none; transform: none; }
-  100% { -moz-transform: translate(-32px, 0); transform: translate(-32px, 0); }
-}
-@-o-keyframes pace-theme-barber-shop-motion {
-  0% { -o-transform: none; transform: none; }
-  100% { -o-transform: translate(-32px, 0); transform: translate(-32px, 0); }
-}
-@-ms-keyframes pace-theme-barber-shop-motion {
-  0% { -ms-transform: none; transform: none; }
-  100% { -ms-transform: translate(-32px, 0); transform: translate(-32px, 0); }
-}
 @keyframes pace-theme-barber-shop-motion {
-  0% { transform: none; transform: none; }
-  100% { transform: translate(-32px, 0); transform: translate(-32px, 0); }
+  0% {
+    transform: none;
+  }
+  100% {
+    transform: translate(-32px, 0);
+  }
 }
