@@ -1,18 +1,15 @@
-/* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
+/* Base styling for the loading animation element */
+.loading-animation {
   -webkit-pointer-events: none;
   pointer-events: none;
-
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-
   -webkit-perspective: 12rem;
   -moz-perspective: 12rem;
   -ms-perspective: 12rem;
   -o-perspective: 12rem;
   perspective: 12rem;
-
   z-index: 2000;
   position: fixed;
   height: 6rem;
@@ -24,11 +21,13 @@
   bottom: 0;
 }
 
-.pace.pace-inactive .pace-progress {
+/* Hide the animation when it's inactive */
+.loading-animation.inactive .loading-progress {
   display: none;
 }
 
-.pace .pace-progress {
+/* Base styling for the loading progress element */
+.loading-animation .loading-progress {
   position: fixed;
   z-index: 2000;
   display: block;
@@ -45,13 +44,11 @@
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 100;
   text-align: center;
-
-  -webkit-animation: pace-theme-center-circle-spin linear infinite 2s;
-  -moz-animation: pace-theme-center-circle-spin linear infinite 2s;
-  -ms-animation: pace-theme-center-circle-spin linear infinite 2s;
-  -o-animation: pace-theme-center-circle-spin linear infinite 2s;
-  animation: pace-theme-center-circle-spin linear infinite 2s;
-
+  -webkit-animation: center-circle-spin 2s linear infinite;
+  -moz-animation: center-circle-spin 2s linear infinite;
+  -ms-animation: center-circle-spin 2s linear infinite;
+  -o-animation: center-circle-spin 2s linear infinite;
+  animation: center-circle-spin 2s linear infinite;
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
@@ -59,32 +56,34 @@
   transform-style: preserve-3d;
 }
 
-.pace .pace-progress:after {
+/* Add the progress text to the loading progress element */
+.loading-animation .loading-progress:after {
   content: attr(data-progress-text);
   display: block;
 }
 
-@-webkit-keyframes pace-theme-center-circle-spin {
+/* Keyframes for the circle spin animation */
+@-webkit-keyframes center-circle-spin {
   from { -webkit-transform: rotateY(0deg) }
   to { -webkit-transform: rotateY(360deg) }
 }
 
-@-moz-keyframes pace-theme-center-circle-spin {
+@-moz-keyframes center-circle-spin {
   from { -moz-transform: rotateY(0deg) }
   to { -moz-transform: rotateY(360deg) }
 }
 
-@-ms-keyframes pace-theme-center-circle-spin {
+@-ms-keyframes center-circle-spin {
   from { -ms-transform: rotateY(0deg) }
   to { -ms-transform: rotateY(360deg) }
 }
 
-@-o-keyframes pace-theme-center-circle-spin {
+@-o-keyframes center-circle-spin {
   from { -o-transform: rotateY(0deg) }
   to { -o-transform: rotateY(360deg) }
 }
 
-@keyframes pace-theme-center-circle-spin {
+@keyframes center-circle-spin {
   from { transform: rotateY(0deg) }
   to { transform: rotateY(360deg) }
 }
