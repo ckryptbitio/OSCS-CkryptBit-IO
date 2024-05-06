@@ -1,8 +1,67 @@
 'use strict';
+
 module.exports = function (grunt) {
 
+  // Project configuration
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+
+    // Read package.json
+    pkg: grunt.file.read('package.json'),
+
+    // Configuration for tasks
+    less: {},
+    cssmin: {},
+    jshint: {},
+    jsbeautifier: {},
+    combine: {},
+    strip_code: {},
+    uglify: {},
+    watch: {},
+    assemble: {},
+    clean: {},
+
+  });
+
+  // Load tasks
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
+  grunt.loadNpmTasks('grunt-combine');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-assemble');
+  grunt.loadNpmTasks('grunt-strip-code');
+
+  // Project tasks
+
+  // Default task
+  grunt.registerTask('default', function () {
+    grunt.task.run([
+      'clean',
+      'combine:less',
+      'less',
+      'cssmin',
+      'jsbeautifier:src',
+      'combine:js',
+      'jsbeautifier:dist',
+      'strip_code',
+      'uglify',
+      'assemble',
+      'jshint'
+    ]);
+  });
+
+  // Development task
+  grunt.registerTask('dev', [
+    'watch'
+  ]);
+
+  // Configuration for tasks
+
+  // less
+  grunt.config.merge({
     less: {
       dist: {
         options: {
@@ -16,6 +75,10 @@ module.exports = function (grunt) {
         dest: 'dist/css/<%= pkg.name %>.css'
       }
     },
+  });
+
+  // cssmin
+  grunt.config.merge({
     cssmin: {
       options: {
         compatibility: 'ie8',
@@ -28,6 +91,10 @@ module.exports = function (grunt) {
         dest: 'dist/css/<%= pkg.name %>.min.css'
       }
     },
+  });
+
+  // jshint
+  grunt.config.merge({
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -38,6 +105,10 @@ module.exports = function (grunt) {
         'dist/js/<%= pkg.name %>.js'
       ]
     },
+  });
+
+  // jsbeautifier
+  grunt.config.merge({
     jsbeautifier: {
       options: {
         js: {
@@ -64,6 +135,10 @@ module.exports = function (grunt) {
       src: ['src/js/*.js', 'docs/docs.js'],
       dist: ['dist/js/<%= pkg.name %>.js']
     },
+  });
+
+  // combine
+  grunt.config.merge({
     combine: {
       js: {
         input: 'src/js/colorpicker-plugin-wrapper.js',
@@ -91,15 +166,25 @@ module.exports = function (grunt) {
         }]
       }
     },
+  });
+
+  // strip_code
+  grunt.config.merge({
     strip_code: {
       src: {
         src: 'dist/js/*.js'
       }
     },
+  });
+
+  // uglify
+  grunt.config.merge({
     uglify: {
       options: {
-        banner: '/*!\n * Bootstrap Colorpicker v<%= pkg.version %>\n' +
-        ' * https://itsjavi.com/bootstrap-colorpicker/\n */\n'
+        banner: '/*!' + grunt.util.linefeed +
+          ' Bootstrap Colorpicker v<%= pkg.version %>' + grunt.util.linefeed +
+          ' https://itsjavi.com/bootstrap-colorpicker/' + grunt.util.linefeed +
+          ' */' + grunt.util.linefeed
       },
       dist: {
         files: {
@@ -109,6 +194,10 @@ module.exports = function (grunt) {
         }
       }
     },
+  });
+
+  // watch
+  grunt.config.merge({
     watch: {
       less: {
         files: [
@@ -132,6 +221,10 @@ module.exports = function (grunt) {
         tasks: ['assemble']
       }
     },
+  });
+
+  // assemble
+  grunt.config.merge({
     assemble: {
       options: {
         assets: 'docs/assets',
@@ -146,43 +239,17 @@ module.exports = function (grunt) {
         dest: './'
       }
     },
+  });
+
+  // clean
+  grunt.config.merge({
     clean: {
       dist: [
         'dist/css/*',
         'dist/js/*',
         'index_new.html'
       ]
-    }
+    },
   });
-
-  // Load tasks
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-jsbeautifier');
-  grunt.loadNpmTasks('grunt-combine');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-assemble');
-  grunt.loadNpmTasks('grunt-strip-code');
-
-  // Register tasks
-  grunt.registerTask('default', [
-    'clean',
-    'combine:less',
-    'less',
-    'cssmin',
-    'jsbeautifier:src',
-    'combine:js',
-    'jsbeautifier:dist',
-    'strip_code',
-    'uglify',
-    'assemble',
-    'jshint'
-  ]);
-  grunt.registerTask('dev', [
-    'watch'
-  ]);
 
 };
