@@ -1,5 +1,8 @@
 /* This is a compiled file, you should be editing the file in the templates directory */
+
+/* The .pace class is applied to the loading overlay element */
 .pace {
+  /* Disables user interactions and selection */
   -webkit-pointer-events: none;
   pointer-events: none;
 
@@ -7,35 +10,55 @@
   -moz-user-select: none;
   user-select: none;
 
+  /* Fixes the loading overlay to the viewport */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
 
+  /* Animates the loading overlay sliding upwards */
   -webkit-transform: translate3d(0, -50px, 0);
   -ms-transform: translate3d(0, -50px, 0);
   transform: translate3d(0, -50px, 0);
 
+  /* Animates the loading overlay sliding upwards with a 0.5s ease-out transition */
   -webkit-transition: -webkit-transform .5s ease-out;
   -ms-transition: -webkit-transform .5s ease-out;
   transition: transform .5s ease-out;
 }
 
+/* The .pace-active class is added to the loading overlay when it's active */
 .pace.pace-active {
+  /* Fixes the loading overlay to the viewport */
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
+/* The .pace-progress class is applied to the progress bar element */
 .pace .pace-progress {
-  display: block;
+  /* Disables user interactions */
+  pointer-events: none;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  /* Positions the progress bar fixed to the viewport */
   position: fixed;
+
+  /* Sets the z-index of the progress bar to ensure it appears on top of other elements */
   z-index: 2000;
+
+  /* Positions the progress bar at the top of the viewport */
   top: 0;
+
+  /* Positions the progress bar to the right of the viewport */
   right: 100%;
+
+  /* Sets the width and height of the progress bar */
   width: 100%;
   height: 10px;
-  background: #ee3148;
 
-  pointer-events: none;
+  /* Sets the background color of the progress bar */
+  background: #ee3148;
 }
