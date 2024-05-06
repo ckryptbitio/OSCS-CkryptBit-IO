@@ -1,1 +1,19 @@
-﻿CKEDITOR.plugins.setLang("templates","sv",{button:"Sidmallar",emptyListMsg:"(Ingen mall är vald)",insertOption:"Ersätt aktuellt innehåll",options:"Inställningar för mall",selectPromptMsg:"Var god välj en mall att använda med editorn\x3cbr\x3e(allt nuvarande innehåll raderas):",title:"Sidmallar"});
+CKEDITOR.plugins.setLang("templates", "sv", {
+  button: "Sidemallar",
+  emptyListMsg: "(Ingen mall är vald)",
+  insertOption: "Ersätt aktuellt innehåll",
+  options: "Inställningar för mall",
+  selectPromptMsg:
+    "Välj en mall att använda med editorn<br>Allt nuvarande innehåll kommer att raderas):",
+  title: "Sidemallar",
+});
+
+
+CKEDITOR.plugins.setLang("templates", "sv", {
+  button: "Sidemallar",
+  emptyListMsg: "(Ingen mall är vald)",
+  insertOption: "Ersätt aktuellt innehåll",
+  options: "Inställningar för mall",
+  selectPromptMsg: `Välj en mall att använda med editorn<br>Allt nuvarande innehåll kommer att raderas):`,
+  title: "Sidemallar",
+});
