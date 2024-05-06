@@ -1,1 +1,17 @@
-e382fc9bec2c99bb4b4acffefe0ea2d3
+def calc(a, b):
+    c = a + b
+    return c
+
+
+def add_numbers(num1, num2):
+    """Adds two numbers and returns the result.
+
+    Args:
+        num1 (int or float): The first number to add.
+        num2 (int or float): The second number to add.
+
+    Returns:
+        int or float: The sum of num1 and num2.
+    """
+    result = num1 + num2
+    return result
