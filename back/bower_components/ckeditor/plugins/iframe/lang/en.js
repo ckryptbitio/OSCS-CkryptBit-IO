@@ -1,1 +1,7 @@
-﻿CKEDITOR.plugins.setLang("iframe","en",{border:"Show frame border",noUrl:"Please type the iframe URL",scrolling:"Enable scrollbars",title:"IFrame Properties",toolbar:"IFrame"});
+CKEDITOR.plugins.setLang("iframe", "en", {
+  showFrameBorder: "Display frame border",
+  provideIframeUrl: "Please enter the iFrame URL",
+  enableScrolling: "Activate scrollbars",
+  iframePropertiesTitle: "iFrame Properties",
+  iframeToolbarTitle: "iFrame",
+});
