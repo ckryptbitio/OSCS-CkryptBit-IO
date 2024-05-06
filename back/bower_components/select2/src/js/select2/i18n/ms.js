@@ -1,33 +1,42 @@
 define(function () {
   // Malay
-  return {
-    errorLoading: function () {
-      return 'Keputusan tidak berjaya dimuatkan.';
-    },
+  const translations = {
+    errorLoading: 'Keputusan tidak berjaya dimuatkan.',
     inputTooLong: function (args) {
-      var overChars = args.input.length - args.maximum;
-
-      return 'Sila hapuskan ' + overChars + ' aksara';
+      const overChars = args.input.length - args.maximum;
+      return `Sila hapuskan ${overChars} aksara.`;
     },
     inputTooShort: function (args) {
-      var remainingChars = args.minimum - args.input.length;
-
-      return 'Sila masukkan ' + remainingChars + ' atau lebih aksara';
+      const remainingChars = args.minimum - args.input.length;
+      return `Sila masukkan ${remainingChars} atau lebih aksara.`;
     },
-    loadingMore: function () {
-      return 'Sedang memuatkan keputusan…';
-    },
+    loadingMore: 'Sedang memuatkan keputusan…',
     maximumSelected: function (args) {
-      return 'Anda hanya boleh memilih ' + args.maximum + ' pilihan';
+      return `Anda hanya boleh memilih ${args.maximum} pilihan.`;
     },
-    noResults: function () {
-      return 'Tiada padanan yang ditemui';
-    },
-    searching: function () {
-      return 'Mencari…';
-    },
-    removeAllItems: function () {
-      return 'Keluarkan semua item';
+    noResults: 'Tiada padanan yang ditemui.',
+    searching: 'Mencari…',
+    removeAllItems: 'Keluarkan semua item',
+  };
+
+  // Helper function to format number with commas
+  function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  // Function to return translated string
+  function t(key, args) {
+    const translation = translations[key];
+
+    if (typeof translation === 'function') {
+      return translation(args);
     }
+
+    return translation;
+  }
+
+  return {
+    t,
+    formatNumber,
   };
 });
