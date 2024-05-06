@@ -1,5 +1,5 @@
-define(["./raphael.core", "./raphael.svg", "./raphael.vml"], function(R) {
+import Raphael from './raphael.core';
+import './raphael.svg';
+import './raphael.vml';
 
-    return R;
-
-});
+export default Raphael;
