@@ -1,38 +1,57 @@
-# <pre>
-# This file is in the public domain, so clarified as of
-# 2009-05-17 by Arthur David Olson.
+# Zone  NAME            GMTOFF  RULES/SAVE   FORMAT    [UNTIL]
+Zone    America/New_York  -5:00   Easter     E%sT
+Zone    America/Detroit   -5:00   Easter     E%sT
+Zone    America/Kentucky/Louisville  -5:00   Easter     E%sT
+Zone    America/Indiana/Indianapolis  -5:00   Easter     E%sT
+Zone    America/Indiana/Vincennes -5:00   Easter     E%sT
+Zone    America/Indiana/Winamac  -5:00   Easter     E%sT
+Zone    America/New_York  -4:00   US/Eastern  E%sT
 
-# Old rules, should the need arise.
-# No attempt is made to handle Newfoundland, since it cannot be expressed
-# using the System V "TZ" scheme (half-hour offset), or anything outside
-# North America (no support for non-standard DST start/end dates), nor
-# the changes in the DST rules in the US after 1976 (which occurred after
-# the old rules were written).
-#
-# If you need the old rules, uncomment ## lines.
-# Compile this *without* leap second correction for true conformance.
+Zone    America/Chicago   -6:00   Easter     C%sT
+Zone    America/Indiana/Marengo -6:00   Easter     C%sT
+Zone    America/Indiana/Petersburg  -6:00   Easter     C%sT
+Zone    America/Indiana/Vevay   -6:00   Easter     C%sT
+Zone    America/Kentucky/Monticello -6:00   Easter     C%sT
+Zone    America/Louisville  -6:00   Easter     C%sT
+Zone    America/Menominee  -6:00   Easter     C%sT
+Zone    America/North_Dakota/Center  -6:00   Easter     C%sT
+Zone    America/North_Dakota/New_Salem -6:00   Easter     C%sT
+Zone    America/Indiana/Tell_City -6:00   Easter     C%sT
+Zone    America/Indiana/Knox   -6:00   Easter     C%sT
+Zone    America/Indiana/Winona  -6:00   Easter     C%sT
+Zone    America/Bogota     -5:00   Colombia   C%sT
 
-# Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
-Rule	SystemV	min	1973	-	Apr	lastSun	2:00	1:00	D
-Rule	SystemV	min	1973	-	Oct	lastSun	2:00	0	S
-Rule	SystemV	1974	only	-	Jan	6	2:00	1:00	D
-Rule	SystemV	1974	only	-	Nov	lastSun	2:00	0	S
-Rule	SystemV	1975	only	-	Feb	23	2:00	1:00	D
-Rule	SystemV	1975	only	-	Oct	lastSun	2:00	0	S
-Rule	SystemV	1976	max	-	Apr	lastSun	2:00	1:00	D
-Rule	SystemV	1976	max	-	Oct	lastSun	2:00	0	S
+Zone    America/Denver    -7:00   Mountain   M%sT
+Zone    America/Shiprock  -7:00   Mountain   M%sT
+Zone    America/Phoenix   -7:00   US/Mountain  M%sT
+Zone    America/Los_Angeles -8:00   Pacific    P%sT
+Zone    America/Tijuana   -8:00   Mexico/BajaNorte P%sT
+Zone    America/Santa_Isabel -8:00   Mexico/BajaNorte P%sT
+Zone    America/Vancouver  -8:00   Canada/Pacific P%sT
+Zone    America/Dawson     -8:00   Canada/Pacific P%sT
+Zone    America/Whitehorse -8:00   Canada/Pacific P%sT
+Zone    America/Inuvik    -7:00   Canada/Mountain M%sT
 
-# Zone	NAME		GMTOFF	RULES/SAVE	FORMAT	[UNTIL]
-## Zone	SystemV/AST4ADT	-4:00	SystemV		A%sT
-## Zone	SystemV/EST5EDT	-5:00	SystemV		E%sT
-## Zone	SystemV/CST6CDT	-6:00	SystemV		C%sT
-## Zone	SystemV/MST7MDT	-7:00	SystemV		M%sT
-## Zone	SystemV/PST8PDT	-8:00	SystemV		P%sT
-## Zone	SystemV/YST9YDT	-9:00	SystemV		Y%sT
-## Zone	SystemV/AST4	-4:00	-		AST
-## Zone	SystemV/EST5	-5:00	-		EST
-## Zone	SystemV/CST6	-6:00	-		CST
-## Zone	SystemV/MST7	-7:00	-		MST
-## Zone	SystemV/PST8	-8:00	-		PST
-## Zone	SystemV/YST9	-9:00	-		YST
-## Zone	SystemV/HST10	-10:00	-		HST
+Zone    America/Anchorage  -9:00   Alaska     A%sT
+Zone    America/Sitka     -9:00   Alaska     A%sT
+Zone    America/Metlakatla -9:00   Alaska     A%sT
+Zone    America/Yakutat    -9:00   Alaska     A%sT
+Zone    America/Nome      -9:00   Alaska     A%sT
+Zone    America/Adak      -10:00  Hawaii     H%sT
+
+Rule    Easter  1970    max     -       Mar lastSun  2:00    1:00    D
+Rule    Easter  1971    1973    -       Mar lastSun  3:00    2:00    D
+Rule    Easter  1974    only    -       Mar lastSun  2:00    1:00    D
+Rule    Easter  1975    only    -       Mar lastSun  3:00    2:00    D
+Rule    Easter  1976    max     -       Mar lastSun  2:00    1:00    D
+Rule    Easter  1981    max     -       Apr Sun>=1  2:00    1:00    D
+Rule    Easter  2007    max     -       Mar Sun>=8  2:00    1:00    D
+
+Rule    Colombia 1970    only    -       Oct lastSun  2:00    0       S
+Rule    Colombia 1971    1991    -       Oct lastSun  2:00    0       S
+Rule    Colombia 1992    only    -       Oct lastSun  1:00    0       S
+Rule    Colombia 1993    max     -       Oct lastSun  2:00    0       S
+Rule    Colombia 2015    max     -       Oct lastSun  2:00    1       S
+Rule    Colombia 2016    only    -       Oct lastSun  3:00    2       S
+Rule    Colombia 2017    max     -       Oct lastSun  2:00    1       S
+
