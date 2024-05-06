@@ -1,62 +1,87 @@
-/* This is a compiled file, you should be editing the file in the templates directory */
-.pace {
-  -webkit-pointer-events: none;
-  pointer-events: none;
+/* Pace spinner - Loading animation */
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
+/* This is a compiled file, you should be editing the file in the templates directory */
+
+/* General settings for the spinner container */
+.pace {
+  /* Disables user interactions and selection */
+  pointer-events: none;
   user-select: none;
 
+  /* Sets z-index to ensure the spinner is always on top */
   z-index: 2000;
+
+  /* Positions the spinner fixed at the center of the viewport */
   position: fixed;
-  height: 90px;
-  width: 90px;
-  margin: auto;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+
+  /* Centers the spinner horizontally and vertically */
+  margin: auto;
+
+  /* Sets the spinner dimensions */
+  height: 90px;
+  width: 90px;
 }
 
+/* Hides the spinner when it's inactive */
 .pace.pace-inactive .pace-activity {
   display: none;
 }
 
+/* Spinner animation settings */
 .pace .pace-activity {
-  position: fixed;
-  z-index: 2000;
-  display: block;
+  /* Positions the spinner absolute within the container */
   position: absolute;
-  left: -30px;
-  top: -30px;
+
+  /* Sets z-index to ensure the spinner is always on top */
+  z-index: 2000;
+
+  /* Hides the spinner when it's inactive */
+  display: block;
+
+  /* Sets the spinner dimensions and border radius */
   height: 90px;
   width: 90px;
-  display: block;
-  border-width: 30px;
-  border-style: double;
-  border-color: #e90f92 transparent transparent;
   border-radius: 50%;
 
+  /* Sets the spinner border style and color */
+  border: 30px double #e90f92;
+
+  /* Positions the spinner -30px left and -30px top */
+  left: -30px;
+  top: -30px;
+
+  /* Animates the spinner rotation */
   -webkit-animation: spin 1s linear infinite;
   -moz-animation: spin 1s linear infinite;
   -o-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
 }
 
+/* Spinner animation keyframes */
 .pace .pace-activity:before {
   content: ' ';
+
+  /* Positions the spinner inner part absolute within the container */
   position: absolute;
-  top: 10px;
-  left: 10px;
+
+  /* Sets the spinner inner part dimensions and border radius */
   height: 50px;
   width: 50px;
-  display: block;
-  border-width: 10px;
-  border-style: solid;
-  border-color: #e90f92 transparent transparent;
   border-radius: 50%;
+
+  /* Sets the spinner inner part border style and color */
+  border: 10px solid #e90f92;
+
+  /* Positions the spinner inner part */
+  top: 10px;
+  left: 10px;
 }
 
+/* Spinner animation keyframes for different browsers */
 @-webkit-keyframes spin {
   100% { -webkit-transform: rotate(359deg); }
 }
