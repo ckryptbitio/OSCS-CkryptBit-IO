@@ -1,1 +1,6 @@
-﻿CKEDITOR.plugins.setLang("autoembed","eu",{embeddingInProgress:"Itsatsitako URLa txertatzen saiatzen...",embeddingFailed:"URL hau ezin izan da automatikoki txertatu."});
+if (CKEDITOR.plugins.getLanguage("autoembed", "eu")) {
+    CKEDITOR.plugins.setLang("autoembed", "eu", {
+        embeddingInProgress: "URLa emaitzen prozesu onena...",
+        embeddingFailed: "Ezin da URL hau automatikoki emaitzen."
+    }, true);
+}
