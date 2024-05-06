@@ -1,18 +1,27 @@
-var mathAbs = Math.abs;
+import { Duration } from './duration'; // assuming the Duration class is defined in this module
 
-export function abs () {
-    var data           = this._data;
+export function abs(duration: Duration): Duration {
+  const data = duration._data;
 
-    this._milliseconds = mathAbs(this._milliseconds);
-    this._days         = mathAbs(this._days);
-    this._months       = mathAbs(this._months);
+  duration._milliseconds = Math.abs(duration._milliseconds);
+  duration._days = Math.abs(duration._days);
+  duration._months = Math.abs(duration._months);
 
-    data.milliseconds  = mathAbs(data.milliseconds);
-    data.seconds       = mathAbs(data.seconds);
-    data.minutes       = mathAbs(data.minutes);
-    data.hours         = mathAbs(data.hours);
-    data.months        = mathAbs(data.months);
-    data.years         = mathAbs(data.years);
+  ({
+    milliseconds: data.milliseconds,
+    seconds: data.seconds,
+    minutes: data.minutes,
+    hours: data.hours,
+    months: data.months,
+    years: data.years,
+  } = {
+    milliseconds: Math.abs(data.milliseconds),
+    seconds: Math.abs(data.seconds),
+    minutes: Math.abs(data.minutes),
+    hours: Math.abs(data.hours),
+    months: Math.abs(data.months),
+    years: Math.abs(data.years),
+  });
 
-    return this;
+  return duration;
 }
