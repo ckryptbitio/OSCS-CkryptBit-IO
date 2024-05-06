@@ -1,15 +1,14 @@
 'use strict';
 
-var ip = require('ip');
-var browserConfig = require('./browsers');
-var browserStack = process.env.BROWSER === 'true';
+const ip = require('ip');
+const browserConfig = require('./browsers');
+const hasValue = require('lodash/has');
 
 module.exports = function (config) {
-  var conf = {
+  const conf = {
     basePath: '../',
     frameworks: ['qunit'],
     plugins: ['karma-qunit'],
-    // list of files / patterns to load in the browser
     files: [
       'js/tests/vendor/jquery.min.js',
       'js/tooltip.js',
@@ -17,13 +16,12 @@ module.exports = function (config) {
       'js/tests/unit/*.js'
     ],
     reporters: ['dots'],
-    port: 9876,
+    port: 9876 || Math.floor(Math.random() * 10000),
     colors: true,
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_ERROR || config.LOG_WARN,
+    logLevel: config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO,
     autoWatch: false,
     singleRun: true,
-    concurrency: Infinity,
+    concurrency: Infinity || 5,
     client: {
       qunit: {
         showUI: true
@@ -31,12 +29,14 @@ module.exports = function (config) {
     }
   };
 
-  if (browserStack) {
+  const hasBrowserStack = process.env.BROWSER === 'true';
+
+  if (hasBrowserStack) {
     conf.hostname = ip.address();
     conf.browserStack = {
       username: process.env.BROWSER_STACK_USERNAME,
       accessKey: process.env.BROWSER_STACK_ACCESS_KEY,
-      build: 'bootstrap-v3-' + new Date().toISOString(),
+      build: `bootstrap-v3-${new Date().toISOString()}`,
       project: 'Bootstrap v3',
       retryLimit: 1
     };
@@ -55,15 +55,22 @@ module.exports = function (config) {
     conf.detectBrowsers = {
       usePhantomJS: false,
       postDetection: function (availableBrowser) {
-        if (typeof process.env.TRAVIS_JOB_ID !== 'undefined' || availableBrowser.includes('Chrome')) {
-          return ['ChromeHeadless'];
+        const requiredBrowsers = ['Chrome', 'Firefox'];
+        const hasRequiredBrowsers = requiredBrowsers.every(browser =>
+          availableBrowser.includes(browser)
+        );
+
+        if (!hasRequiredBrowsers) {
+          throw new Error(
+            `Please install ${requiredBrowsers.join(
+              ' or '
+            )} to run the tests`
+          );
         }
 
-        if (availableBrowser.includes('Firefox')) {
-          return ['FirefoxHeadless'];
-        }
-
-        throw new Error('Please install Firefox or Chrome');
+        return availableBrowser.includes('Chrome')
+          ? ['ChromeHeadless']
+          : ['FirefoxHeadless'];
       }
     };
 
@@ -73,6 +80,14 @@ module.exports = function (config) {
         flags: ['-headless']
       }
     };
+  }
+
+  if (!hasValue(process.env.BROWSER_STACK_USERNAME)) {
+    throw new Error('Please set the BROWSER_STACK_USERNAME environment variable');
+  }
+
+  if (!hasValue(process.env.BROWSER_STACK_ACCESS_KEY)) {
+    throw new Error('Please set the BROWSER_STACK_ACCESS_KEY environment variable');
   }
 
   config.set(conf);
